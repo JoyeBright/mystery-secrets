@@ -3,17 +3,15 @@ import os
 
 app = Flask(__name__)
 
-# 3 top secrets, handed out one by one
+# Reset secrets fresh at every server start
 secrets = ["Captain Jack Snackrow", "Department of Intelligent Systems", "R&MD"]
 
 # File to track claimed IPs
 CLAIMED_FILE = "claimed_ips.txt"
 
-# Reset file every time the server starts
-open(CLAIMED_FILE, "w").close()
-
-# Start with an empty dict
+# Always start with a clean file and empty dict
 claimed_ips = {}
+open(CLAIMED_FILE, "w").close()
 
 @app.route("/secret")
 def get_secret():
