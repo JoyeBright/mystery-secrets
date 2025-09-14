@@ -1,19 +1,23 @@
 from flask import Flask, jsonify, request
 from collections import deque
+import os
 
 app = Flask(__name__)
 
+# Secrets pool
 secrets = deque([
     "Captain Jack Snackrow",
     "Department of Intelligent Systems",
     "R&MD"
 ])
 
+# Track claimed IPs
 claimed_ips = {}
+
 
 @app.route("/secret")
 def get_secret():
-    # Trust only the actual connection IP
+    # Use actual connection IP (not spoofable headers)
     client_ip = request.remote_addr
 
     if client_ip in claimed_ips:
@@ -37,3 +41,9 @@ def get_secret():
         "secret": None,
         "message": "❌ No more secrets, expired"
     }), 403
+
+
+if __name__ == "__main__":
+    # Render sets the PORT environment variable
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
