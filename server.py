@@ -9,12 +9,11 @@ secrets = ["Captain Jack Snackrow", "Department of Intelligent Systems", "R&MD"]
 # File to track claimed IPs
 CLAIMED_FILE = "claimed_ips.txt"
 
-# Load claimed IPs at startup
-if os.path.exists(CLAIMED_FILE):
-    with open(CLAIMED_FILE, "r") as f:
-        claimed_ips = dict(line.strip().split("=", 1) for line in f if "=" in line)
-else:
-    claimed_ips = {}
+# Reset file every time the server starts
+open(CLAIMED_FILE, "w").close()
+
+# Start with an empty dict
+claimed_ips = {}
 
 @app.route("/secret")
 def get_secret():
