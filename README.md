@@ -1,11 +1,13 @@
 # Mystery Secrets
 
-A simple Flask web service that reveals top secrets one by one via an API endpoint.
+A simple Flask web service that reveals top secrets one by one via an API endpoint.  
+This project is designed for the Model Deployment and Reproducibility course in the DSS program.
 
 ## Features
 
-- Serves secrets at `/secret` endpoint.
-- Returns a new secret each time until all are revealed.
+- Serves secrets at the `/secret` endpoint.
+- Returns a new secret with each request until all are revealed.
+- Easy to deploy and integrate into model deployment workflows.
 
 ## Setup
 
@@ -14,29 +16,30 @@ A simple Flask web service that reveals top secrets one by one via an API endpoi
    pip install -r requirements.txt
    ```
 
-2. **Run the server:**
+2. **Run the server locally:**
    ```sh
-   python sever.py
+   python server.py
    ```
 
-   Or, if deploying with a platform that uses a `Procfile`:
-   ```sh
+3. **Deploy using a Procfile (for platforms like Heroku):**
+   ```
    web: python server.py
    ```
 
 ## Usage
 
-- Access `http://localhost:5000/secret` in your browser or via `curl`:
+- Access secrets via:  
+  `http://localhost:5000/secret`
+
+- Example using `curl`:
   ```sh
   curl http://localhost:5000/secret
   ```
 
-## Files
+## Project Structure
 
-- `sever.py`: Main Flask application ([sever.py](sever.py))
-- `requirements.txt`: Python dependencies ([requirements.txt](requirements.txt))
-- `Procfile`: Process type declaration for deployment ([Procfile](Procfile))
+- `server.py`: Main Flask application
+- `requirements.txt`: Python dependencies
+- `Procfile`: Deployment configuration
 
 ## License
-
-MIT
